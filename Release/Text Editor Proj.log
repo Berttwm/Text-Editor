@@ -10,24 +10,29 @@ cl : Command line warning D9002: ignoring unknown option '-lXext'
 cl : Command line warning D9002: ignoring unknown option '-lX11'
 cl : Command line warning D9002: ignoring unknown option '-lm'
   fltk_editor.cpp
+c:\users\bertrand\source\repos\text editor proj\text editor proj\fltk_editor.cpp(156): error C2660: 'saveas_cb': function does not take 0 arguments
+  c:\users\bertrand\source\repos\text editor proj\text editor proj\fltk_editor.cpp(73): note: see declaration of 'saveas_cb'
+c:\users\bertrand\source\repos\text editor proj\text editor proj\fltk_editor.cpp(166): error C2664: 'void save_file(char *)': cannot convert argument 1 from 'const char *' to 'char *'
+  c:\users\bertrand\source\repos\text editor proj\text editor proj\fltk_editor.cpp(166): note: Conversion loses qualifiers
+c:\users\bertrand\source\repos\text editor proj\text editor proj\fltk_editor.cpp(174): error C2664: 'void load_file(char *,int)': cannot convert argument 1 from 'const char *' to 'char *'
+  c:\users\bertrand\source\repos\text editor proj\text editor proj\fltk_editor.cpp(174): note: Conversion loses qualifiers
+c:\users\bertrand\source\repos\text editor proj\text editor proj\fltk_editor.cpp(182): error C2664: 'void load_file(char *,int)': cannot convert argument 1 from 'const char *' to 'char *'
+  c:\users\bertrand\source\repos\text editor proj\text editor proj\fltk_editor.cpp(182): note: Conversion loses qualifiers
   fltk_editor.cpp
+c:\users\bertrand\source\repos\text editor proj\text editor proj\fltk_editor.cpp(156): error C2660: 'saveas_cb': function does not take 0 arguments
+  c:\users\bertrand\source\repos\text editor proj\text editor proj\fltk_editor.cpp(73): note: see declaration of 'saveas_cb'
+c:\users\bertrand\source\repos\text editor proj\text editor proj\fltk_editor.cpp(166): error C2664: 'void save_file(char *)': cannot convert argument 1 from 'const char *' to 'char *'
+  c:\users\bertrand\source\repos\text editor proj\text editor proj\fltk_editor.cpp(166): note: Conversion loses qualifiers
+c:\users\bertrand\source\repos\text editor proj\text editor proj\fltk_editor.cpp(174): error C2664: 'void load_file(char *,int)': cannot convert argument 1 from 'const char *' to 'char *'
+  c:\users\bertrand\source\repos\text editor proj\text editor proj\fltk_editor.cpp(174): note: Conversion loses qualifiers
+c:\users\bertrand\source\repos\text editor proj\text editor proj\fltk_editor.cpp(182): error C2664: 'void load_file(char *,int)': cannot convert argument 1 from 'const char *' to 'char *'
+  c:\users\bertrand\source\repos\text editor proj\text editor proj\fltk_editor.cpp(182): note: Conversion loses qualifiers
   fltk_editor.cpp
-fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl view_cb(class Fl_Widget *,void *)" (?view_cb@@YAXPAVFl_Widget@@PAX@Z)
-fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl find_cb(class Fl_Widget *,void *)" (?find_cb@@YAXPAVFl_Widget@@PAX@Z)
-fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl replace_cb(class Fl_Widget *,void *)" (?replace_cb@@YAXPAVFl_Widget@@PAX@Z)
-fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl undo_cb(class Fl_Widget *,void *)" (?undo_cb@@YAXPAVFl_Widget@@PAX@Z)
-fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl open_cb(class Fl_Widget *,void *)" (?open_cb@@YAXPAVFl_Widget@@PAX@Z)
-fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl quit_cb(class Fl_Widget *,void *)" (?quit_cb@@YAXPAVFl_Widget@@PAX@Z)
-fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl cut_cb(class Fl_Widget *,void *)" (?cut_cb@@YAXPAVFl_Widget@@PAX@Z)
-fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl paste_cb(class Fl_Widget *,void *)" (?paste_cb@@YAXPAVFl_Widget@@PAX@Z)
-fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl find2_cb(class Fl_Widget *,void *)" (?find2_cb@@YAXPAVFl_Widget@@PAX@Z)
-fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl saveas_cb(class Fl_Widget *,void *)" (?saveas_cb@@YAXPAVFl_Widget@@PAX@Z)
-fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl delete_cb(class Fl_Widget *,void *)" (?delete_cb@@YAXPAVFl_Widget@@PAX@Z)
-fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl new_cb(class Fl_Widget *,void *)" (?new_cb@@YAXPAVFl_Widget@@PAX@Z)
-fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl replace2_cb(class Fl_Widget *,void *)" (?replace2_cb@@YAXPAVFl_Widget@@PAX@Z)
-fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl save_cb(class Fl_Widget *,void *)" (?save_cb@@YAXPAVFl_Widget@@PAX@Z)
-fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl insert_cb(class Fl_Widget *,void *)" (?insert_cb@@YAXPAVFl_Widget@@PAX@Z)
-fltk_editor.obj : error LNK2001: unresolved external symbol "public: __thiscall EditorWindow::EditorWindow(int,int,char const *)" (??0EditorWindow@@QAE@HHPBD@Z)
-fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl copy_cb(class Fl_Widget *,void *)" (?copy_cb@@YAXPAVFl_Widget@@PAX@Z)
-fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl close_cb(class Fl_Widget *,void *)" (?close_cb@@YAXPAVFl_Widget@@PAX@Z)
-C:\Users\Bertrand\source\repos\Text Editor Proj\Release\Text Editor Proj.exe : fatal error LNK1120: 18 unresolved externals
+c:\users\bertrand\source\repos\text editor proj\text editor proj\fltk_editor.cpp(156): error C2660: 'saveas_cb': function does not take 0 arguments
+  c:\users\bertrand\source\repos\text editor proj\text editor proj\fltk_editor.cpp(73): note: see declaration of 'saveas_cb'
+c:\users\bertrand\source\repos\text editor proj\text editor proj\fltk_editor.cpp(166): error C2664: 'void save_file(char *)': cannot convert argument 1 from 'const char *' to 'char *'
+  c:\users\bertrand\source\repos\text editor proj\text editor proj\fltk_editor.cpp(166): note: Conversion loses qualifiers
+c:\users\bertrand\source\repos\text editor proj\text editor proj\fltk_editor.cpp(174): error C2664: 'void load_file(char *,int)': cannot convert argument 1 from 'const char *' to 'char *'
+  c:\users\bertrand\source\repos\text editor proj\text editor proj\fltk_editor.cpp(174): note: Conversion loses qualifiers
+c:\users\bertrand\source\repos\text editor proj\text editor proj\fltk_editor.cpp(182): error C2664: 'void load_file(char *,int)': cannot convert argument 1 from 'const char *' to 'char *'
+  c:\users\bertrand\source\repos\text editor proj\text editor proj\fltk_editor.cpp(182): note: Conversion loses qualifiers
