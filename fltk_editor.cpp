@@ -36,11 +36,15 @@ public:
 	char               search[256];
 };
 
+
+
 // Global variables
 #define TS 14 // default editor textsize
 int num_windows = 0;
 int changed = 0;
 int loading = 0;
+int	wrap_mode;
+int	line_numbers;
 char filename[256] = "";
 char title[256];
 Fl_Text_Buffer *textbuf = 0;
@@ -69,8 +73,8 @@ Fl_Button *replace_cancel = new Fl_Button(230, 70, 60, 25, "Cancel");
 void new_cb(Fl_Widget*, void*);
 void open_cb(Fl_Widget*, void*);
 void insert_cb(Fl_Widget*, void*);
-void save_cb(Fl_Widget*, void*);
-void saveas_cb(Fl_Widget*, void*);
+void save_cb();
+void saveas_cb();
 void view_cb(Fl_Widget*, void*);
 void close_cb(Fl_Widget*, void*);
 void quit_cb(Fl_Widget*, void*);
@@ -83,15 +87,47 @@ void find_cb(Fl_Widget*, void*);
 void find2_cb(Fl_Widget*, void*);
 void replace_cb(Fl_Widget*, void*);
 void replace2_cb(Fl_Widget*, void*);
+void replall_cb(Fl_Widget*, void* v);
+void replcan_cb(Fl_Widget*, void* v);
 void changed_cb(int, int nInserted, int nDeleted, int, const char*, void* v);
 int check_save(void);
-void save_file(char *newfile);
-void load_file(char *newfile, int ipos);
+void save_file(const char *newfile);
+void load_file(const char *newfile, int ipos);
 void set_title(Fl_Window* w);
 void style_update(int pos, int nInserted, int nDeleted, int, const char *, void *cbArg);
 void style_parse(const char *text, char *style, int length);
 void style_unfinished_cb(int, void*);
 Fl_Window* new_view();
+
+
+// Define sizing of find/replace boxes
+EditorWindow::EditorWindow(int w, int h, const char* t) : Fl_Double_Window(w, h, t) {
+	replace_dlg = new Fl_Window(300, 105, "Replace");
+	replace_find = new Fl_Input(80, 10, 210, 25, "Find:");
+	replace_find->align(FL_ALIGN_LEFT);
+
+	replace_with = new Fl_Input(80, 40, 210, 25, "Replace:");
+	replace_with->align(FL_ALIGN_LEFT);
+
+	replace_all = new Fl_Button(10, 70, 90, 25, "Replace All");
+	replace_all->callback((Fl_Callback *)replall_cb, this);
+
+	replace_next = new Fl_Return_Button(105, 70, 120, 25, "Replace Next");
+	replace_next->callback((Fl_Callback *)replace2_cb, this);
+
+	replace_cancel = new Fl_Button(230, 70, 60, 25, "Cancel");
+	replace_cancel->callback((Fl_Callback *)replcan_cb, this);
+	replace_dlg->end();
+	replace_dlg->set_non_modal();
+	editor = 0;
+	*search = (char)0;
+	wrap_mode = 0;
+	line_numbers = 0;
+}
+
+EditorWindow::~EditorWindow() {
+	delete replace_dlg;
+}
 
 // Menubar items
 Fl_Menu_Item menuitems[] = {
@@ -141,6 +177,14 @@ int main(int argc, char **argv)
 }
 
 /* Menu Bar Functions */
+/*
+	Menu Bar Text File Access Functions
+	1) new_cb - Create blank new file
+	2) save_cb - Save current file
+	3) saveas_cb - Save current file as file name
+	4) open_cb - Open a file
+	5) insert_cb - Insert a file's contents into current position
+*/
 void new_cb(Fl_Widget*, void*) {
 	if (!check_save()) return;
 
@@ -209,7 +253,133 @@ void quit_cb(Fl_Widget*, void*) {
 
 	exit(0);
 }
-/* File Manipulation Functions */
+/* 
+	Menu Bar Text Section Functions 
+	1) undo_cb - Undo last change
+	2) cut_cb - Remove current section
+	3) copy_cb - Copy current section
+	4) paste_cb - Paste last copied section
+	5) delete_cb - Delete section
+*/
+
+/*
+	Menu Bar Text Search/Replace Functions
+	1) find_cb - Find first occurance of search string
+	2) find2_cb - Find second occurance of search string
+	3) replace_cb - Replace first occurance of search string
+	4) replace2_cb - Replace next occurance of search string
+	5) replall_cb - Replace all occurences of search string
+	6) replcan_cb - Hides replace dialog
+*/
+void find_cb(Fl_Widget* w, void* v) {
+	EditorWindow* e = (EditorWindow*)v;
+	const char *val;
+
+	val = fl_input("Search String:", e->search);
+	if (val != NULL) {
+		// User entered a string - go find it!
+		strcpy(e->search, val);
+		find2_cb(w, v);
+	}
+	else {
+		fl_alert("Find field cannot be empty!");
+	}
+}
+void find2_cb(Fl_Widget* w, void* v) {
+	EditorWindow* e = (EditorWindow*)v;
+	if (e->search[0] == '\0') {
+		// Search string is blank; get a new one...
+		find_cb(w, v);
+		return;
+	}
+
+	int pos = e->editor->insert_position();
+	int found = textbuf->search_forward(pos, e->search, &pos);
+	if (found) {
+		// Found a match; select and update the position...
+		textbuf->select(pos, pos + strlen(e->search));
+		e->editor->insert_position(pos + strlen(e->search));
+		e->editor->show_insert_position();
+	}
+	else fl_alert("No occurrences of \'%s\' found!", e->search);
+}
+void replace_cb(Fl_Widget*, void* v) {
+	EditorWindow* e = (EditorWindow*)v;
+	e->replace_dlg->show();
+}
+void replace2_cb(Fl_Widget*, void* v) {
+	EditorWindow* e = (EditorWindow*)v;
+	const char *find = e->replace_find->value();
+	const char *replace = e->replace_with->value();
+
+	if (find[0] == '\0') {
+		// Search string is blank; get a new one...
+		e->replace_dlg->show();
+		return;
+	}
+
+	e->replace_dlg->hide();
+
+	int pos = e->editor->insert_position();
+	int found = textbuf->search_forward(pos, find, &pos);
+
+	if (found) {
+		// Found a match; update the position and replace text...
+		textbuf->select(pos, pos + strlen(find));
+		textbuf->remove_selection();
+		textbuf->insert(pos, replace);
+		textbuf->select(pos, pos + strlen(replace));
+		e->editor->insert_position(pos + strlen(replace));
+		e->editor->show_insert_position();
+	}
+	else fl_alert("No occurrences of \'%s\' found!", find);
+}
+void replall_cb(Fl_Widget*, void* v) {
+	EditorWindow* e = (EditorWindow*)v;
+	const char *find = e->replace_find->value();
+	const char *replace = e->replace_with->value();
+
+	find = e->replace_find->value();
+	if (find[0] == '\0') {
+		// Search string is blank; get a new one...
+		e->replace_dlg->show();
+		return;
+	}
+
+	e->replace_dlg->hide();
+
+	e->editor->insert_position(0);
+	int times = 0;
+
+	// Loop through the whole string
+	for (int found = 1; found;) {
+		int pos = e->editor->insert_position();
+		found = textbuf->search_forward(pos, find, &pos);
+
+		if (found) {
+			// Found a match; update the position and replace text...
+			textbuf->select(pos, pos + strlen(find));
+			textbuf->remove_selection();
+			textbuf->insert(pos, replace);
+			e->editor->insert_position(pos + strlen(replace));
+			e->editor->show_insert_position();
+			times++;
+		}
+	}
+	if (times) fl_message("Replaced %d occurrences.", times);
+	else fl_alert("No occurrences of \'%s\' found!", find);
+}
+void replcan_cb(Fl_Widget*, void* v) {
+	EditorWindow* e = (EditorWindow*)v;
+	e->replace_dlg->hide();
+}
+/* 
+	File Manipulation Functions 
+	1) check_save - check if file has been saved, if not, cancel operation, save or discard file
+	2) save_file - save the file
+	3) load_file - load the file
+	4)changed_cb - check if file has been changed
+*/
 int check_save(void) {
 	if (!changed) return 1;
 
