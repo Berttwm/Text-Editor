@@ -12,9 +12,9 @@ cl : Command line warning D9002: ignoring unknown option '-lm'
   fltk_editor.cpp
   fltk_editor.cpp
   fltk_editor.cpp
-fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl undo_cb(class Fl_Widget *,void *)" (?undo_cb@@YAXPAVFl_Widget@@PAX@Z)
-fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl cut_cb(class Fl_Widget *,void *)" (?cut_cb@@YAXPAVFl_Widget@@PAX@Z)
-fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl paste_cb(class Fl_Widget *,void *)" (?paste_cb@@YAXPAVFl_Widget@@PAX@Z)
-fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl delete_cb(class Fl_Widget *,void *)" (?delete_cb@@YAXPAVFl_Widget@@PAX@Z)
-fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl copy_cb(class Fl_Widget *,void *)" (?copy_cb@@YAXPAVFl_Widget@@PAX@Z)
-C:\Users\Bertrand\source\repos\Text Editor Proj\Release\Text Editor Proj.exe : fatal error LNK1120: 5 unresolved externals
+  Generating code
+  35 of 69 functions (50.7%) were compiled, the rest were copied from previous compilation.
+    6 functions were new in current compilation
+    2 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  Text Editor Proj.vcxproj -> C:\Users\Bertrand\source\repos\Text Editor Proj\Release\Text Editor Proj.exe

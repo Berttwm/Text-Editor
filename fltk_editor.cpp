@@ -97,6 +97,8 @@ void set_title(Fl_Window* w);
 void style_update(int pos, int nInserted, int nDeleted, int, const char *, void *cbArg);
 void style_parse(const char *text, char *style, int length);
 void style_unfinished_cb(int, void*);
+void cb(const char *fname);
+void style_init(void);
 Fl_Window* new_view();
 
 
@@ -143,7 +145,6 @@ Fl_Menu_Item menuitems[] = {
 	{ 0 },
 
   { "&Edit", 0, 0, 0, FL_SUBMENU },
-	{ "&Undo",       FL_CTRL + 'z', (Fl_Callback *)undo_cb, 0, FL_MENU_DIVIDER },
 	{ "Cu&t",        FL_CTRL + 'x', (Fl_Callback *)cut_cb },
 	{ "&Copy",       FL_CTRL + 'c', (Fl_Callback *)copy_cb },
 	{ "&Paste",      FL_CTRL + 'v', (Fl_Callback *)paste_cb },
@@ -165,7 +166,8 @@ Fl_Menu_Item menuitems[] = {
 int main(int argc, char **argv)
 {
 	textbuf = new Fl_Text_Buffer;
-
+	style_init();
+	fl_open_callback(cb);
 	Fl_Window* window = new_view();
 
 	window->show(1, argv);
@@ -261,7 +263,21 @@ void quit_cb(Fl_Widget*, void*) {
 	4) paste_cb - Paste last copied section
 	5) delete_cb - Delete section
 */
-
+void cut_cb(Fl_Widget*, void* v) {
+	EditorWindow* e = (EditorWindow*)v;
+	Fl_Text_Editor::kf_cut(0, e->editor);
+}
+void copy_cb(Fl_Widget*, void* v) {
+	EditorWindow* e = (EditorWindow*)v;
+	Fl_Text_Editor::kf_copy(0, e->editor);
+}
+void paste_cb(Fl_Widget*, void* v) {
+	EditorWindow* e = (EditorWindow*)v;
+	Fl_Text_Editor::kf_paste(0, e->editor);
+}
+void delete_cb(Fl_Widget*, void*) {
+	textbuf->remove_selection();
+}
 /*
 	Menu Bar Text Search/Replace Functions
 	1) find_cb - Find first occurance of search string
@@ -783,3 +799,21 @@ void style_parse(const char *text, char *style, int length) {
 	}
 }
 
+void style_init(void) {
+	char *style = new char[textbuf->length() + 1];
+	char *text = textbuf->text();
+
+	memset(style, 'A', textbuf->length());
+	style[textbuf->length()] = '\0';
+
+	if (!stylebuf) stylebuf = new Fl_Text_Buffer(textbuf->length());
+
+	style_parse(text, style, textbuf->length());
+
+	stylebuf->text(style);
+	delete[] style;
+	free(text);
+}
+void cb(const char *fname) {
+	load_file(fname, -1);
+}
