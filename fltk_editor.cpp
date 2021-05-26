@@ -145,6 +145,7 @@ Fl_Menu_Item menuitems[] = {
 	{ 0 },
 
   { "&Edit", 0, 0, 0, FL_SUBMENU },
+	{ "&Undo",       FL_CTRL + 'z', (Fl_Callback *)undo_cb, 0, FL_MENU_DIVIDER },
 	{ "Cu&t",        FL_CTRL + 'x', (Fl_Callback *)cut_cb },
 	{ "&Copy",       FL_CTRL + 'c', (Fl_Callback *)copy_cb },
 	{ "&Paste",      FL_CTRL + 'v', (Fl_Callback *)paste_cb },
@@ -263,6 +264,11 @@ void quit_cb(Fl_Widget*, void*) {
 	4) paste_cb - Paste last copied section
 	5) delete_cb - Delete section
 */
+
+void undo_cb(Fl_Widget*, void* v) {
+	EditorWindow* e = (EditorWindow*)v;
+	Fl_Text_Editor::kf_undo(0, e->editor);
+}
 void cut_cb(Fl_Widget*, void* v) {
 	EditorWindow* e = (EditorWindow*)v;
 	Fl_Text_Editor::kf_cut(0, e->editor);

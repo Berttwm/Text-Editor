@@ -13,8 +13,8 @@ cl : Command line warning D9002: ignoring unknown option '-lm'
   fltk_editor.cpp
   fltk_editor.cpp
   Generating code
-  35 of 69 functions (50.7%) were compiled, the rest were copied from previous compilation.
-    6 functions were new in current compilation
-    2 functions had inline decision re-evaluated but remain unchanged
+  4 of 70 functions ( 5.7%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    3 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Text Editor Proj.vcxproj -> C:\Users\Bertrand\source\repos\Text Editor Proj\Release\Text Editor Proj.exe
