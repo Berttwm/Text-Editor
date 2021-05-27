@@ -1,0 +1,12 @@
+﻿  edit.cpp
+  EditorWindow.cpp
+  file.cpp
+  fltk_editor.cpp
+  search.cpp
+  Generating Code...
+EditorWindow.obj : error LNK2001: unresolved external symbol "void __cdecl undo_cb(class Fl_Widget *,void *)" (?undo_cb@@YAXPAVFl_Widget@@PAX@Z)
+EditorWindow.obj : error LNK2001: unresolved external symbol "void __cdecl cut_cb(class Fl_Widget *,void *)" (?cut_cb@@YAXPAVFl_Widget@@PAX@Z)
+EditorWindow.obj : error LNK2001: unresolved external symbol "void __cdecl copy_cb(class Fl_Widget *,void *)" (?copy_cb@@YAXPAVFl_Widget@@PAX@Z)
+EditorWindow.obj : error LNK2001: unresolved external symbol "void __cdecl paste_cb(class Fl_Widget *,void *)" (?paste_cb@@YAXPAVFl_Widget@@PAX@Z)
+EditorWindow.obj : error LNK2001: unresolved external symbol "void __cdecl delete_cb(class Fl_Widget *,void *)" (?delete_cb@@YAXPAVFl_Widget@@PAX@Z)
+C:\Users\Bertrand\source\repos\Project1\Debug\Project1.exe : fatal error LNK1120: 5 unresolved externals
