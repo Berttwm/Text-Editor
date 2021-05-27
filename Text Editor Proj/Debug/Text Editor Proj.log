@@ -1,0 +1,28 @@
+﻿cl : Command line warning D9035: option 'o' has been deprecated and will be removed in a future release
+cl : Command line warning D9026: options apply to entire command line
+cl : Command line warning D9002: ignoring unknown option '-lfltk'
+cl : Command line warning D9002: ignoring unknown option '-lXext'
+cl : Command line warning D9002: ignoring unknown option '-lX11'
+cl : Command line warning D9002: ignoring unknown option '-lm'
+  fltk_editor.cpp
+  fltk_editor.cpp
+  Generating Code...
+fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl new_cb(class Fl_Widget *,void *)" (?new_cb@@YAXPAVFl_Widget@@PAX@Z)
+fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl open_cb(class Fl_Widget *,void *)" (?open_cb@@YAXPAVFl_Widget@@PAX@Z)
+fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl insert_cb(class Fl_Widget *,void *)" (?insert_cb@@YAXPAVFl_Widget@@PAX@Z)
+fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl save_cb(class Fl_Widget *,void *)" (?save_cb@@YAXPAVFl_Widget@@PAX@Z)
+fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl saveas_cb(class Fl_Widget *,void *)" (?saveas_cb@@YAXPAVFl_Widget@@PAX@Z)
+fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl view_cb(class Fl_Widget *,void *)" (?view_cb@@YAXPAVFl_Widget@@PAX@Z)
+fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl close_cb(class Fl_Widget *,void *)" (?close_cb@@YAXPAVFl_Widget@@PAX@Z)
+fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl quit_cb(class Fl_Widget *,void *)" (?quit_cb@@YAXPAVFl_Widget@@PAX@Z)
+fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl undo_cb(class Fl_Widget *,void *)" (?undo_cb@@YAXPAVFl_Widget@@PAX@Z)
+fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl cut_cb(class Fl_Widget *,void *)" (?cut_cb@@YAXPAVFl_Widget@@PAX@Z)
+fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl copy_cb(class Fl_Widget *,void *)" (?copy_cb@@YAXPAVFl_Widget@@PAX@Z)
+fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl paste_cb(class Fl_Widget *,void *)" (?paste_cb@@YAXPAVFl_Widget@@PAX@Z)
+fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl delete_cb(class Fl_Widget *,void *)" (?delete_cb@@YAXPAVFl_Widget@@PAX@Z)
+fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl find_cb(class Fl_Widget *,void *)" (?find_cb@@YAXPAVFl_Widget@@PAX@Z)
+fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl find2_cb(class Fl_Widget *,void *)" (?find2_cb@@YAXPAVFl_Widget@@PAX@Z)
+fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl replace_cb(class Fl_Widget *,void *)" (?replace_cb@@YAXPAVFl_Widget@@PAX@Z)
+fltk_editor.obj : error LNK2001: unresolved external symbol "void __cdecl replace2_cb(class Fl_Widget *,void *)" (?replace2_cb@@YAXPAVFl_Widget@@PAX@Z)
+fltk_editor.obj : error LNK2019: unresolved external symbol "public: __thiscall EditorWindow::EditorWindow(int,int,char const *)" (??0EditorWindow@@QAE@HHPBD@Z) referenced in function "class Fl_Window * __cdecl new_view(void)" (?new_view@@YAPAVFl_Window@@XZ)
+C:\Users\Bertrand\source\repos\Text Editor Proj\Debug\Text Editor Proj.exe : fatal error LNK1120: 18 unresolved externals
