@@ -1,3 +1,4 @@
+/* MAIN FILE */
 #pragma once
 #include"edit.h"
 #include"search.h"
