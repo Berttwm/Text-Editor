@@ -19,9 +19,19 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="edit.cpp" />
+    <ClCompile Include="EditorWindow.cpp" />
+    <ClCompile Include="file.cpp" />
     <ClCompile Include="fltk_editor.cpp">
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">-o editor fltk_editor.cpp -lfltk -lXext -lX11 -lm %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
+    <ClCompile Include="search.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="EditorWindow.h" />
+    <ClInclude Include="file.h" />
+    <ClInclude Include="edit.h" />
+    <ClInclude Include="search.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
